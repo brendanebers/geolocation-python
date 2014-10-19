@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
-
-class GeocodeParser(object):
+class GeocodeParser():
     _json_data = None
 
     @property
@@ -81,11 +78,15 @@ class GeocodeParser(object):
         return self._search_geometry_location('lng')
 
     def get_administrative_area(self):
-        """Method should returns all administrative areas of current location."""
+        """
+        Method should returns all administrative areas of current location.
+        """
         data = list()
 
         administrative_areas = [
-            'administrative_area_level_1', 'administrative_area_level_2', 'administrative_area_level_3'
+            'administrative_area_level_1',
+            'administrative_area_level_2',
+            'administrative_area_level_3'
         ]
 
         for area_type in administrative_areas:

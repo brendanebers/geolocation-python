@@ -1,15 +1,8 @@
-# -*- coding: utf-8 -*-
 import json
 import re
-import sys
-version = sys.version_info
-
-if version.major < 3:
-    import urllib2
-elif version.major == 3:
-    import urllib.request
-    import urllib.error
-    import urllib.parse
+import urllib.request
+import urllib.error
+import urllib.parse
 
 STATUS_OK = 'OK'
 STATUS_ZERO_RESULTS = 'ZERO_RESULTS'
@@ -29,18 +22,19 @@ STATUS_CODES = (
 )
 
 
-class GeocodeApi(object):
+class GeocodeApi():
     STATUS_OK = 'OK'
 
-    _json_api_address = 'https://maps.googleapis.com/maps/api/geocode/json?address='
+    _json_api_address =\
+        'https://maps.googleapis.com/maps/api/geocode/json?address='
 
     location = None
 
     def __init__(self, api_key):
-        self._api_key = "&key=%s" % api_key
+        self._api_key = "&key={}".format(api_key)
 
     def __repr__(self):
-        return '<Geocode: %s>' % self.location
+        return '<Geocode: {}>'.format(self.location)
 
     def query(self, location):
         """Main method should returns json results."""
@@ -59,7 +53,8 @@ class GeocodeApi(object):
         prepare = re.sub('\s+', ' ', query_).strip()
         prepare = ',+'.join(prepare.split())
 
-        prepare = "%s%s%s" % (self._json_api_address, prepare, self._api_key)
+        prepare = "{}{}{}".format(
+            self._json_api_address, prepare, self._api_key)
 
         return prepare
 
@@ -70,10 +65,7 @@ class GeocodeApi(object):
 
     def _get_json_data(self, request):
         """Method sends request to google geocode api and returns json data."""
-        if version.major < 3:
-            json_data = urllib2.urlopen(request).read()
-        else:
-            json_data = urllib.request.urlopen(request).read().decode('utf-8')
+        json_data = urllib.request.urlopen(request).read().decode('utf-8')
 
         json_results = json.loads(json_data)
 
@@ -82,8 +74,4 @@ class GeocodeApi(object):
         if status == STATUS_OK:
             return json_results['results']
         else:
-            if version.major < 3:
-                raise self._get_status_code(status)
-            else:
-                raise ValueError(self._get_status_code(status))
-
+            raise ValueError(self._get_status_code(status))

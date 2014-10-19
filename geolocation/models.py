@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
-
-class LocationModel(object):
+class LocationModel():
     _administrative_area = list()
 
     def __init__(self, **kwargs):
@@ -16,7 +13,7 @@ class LocationModel(object):
         self.formatted_address = kwargs.get('formatted_address', None)
 
     def __repr__(self):
-        return '<LocationModel: %s>' % self.city
+        return '<LocationModel: {}>'.format(self.city)
 
     @property
     def administrative_area(self):
@@ -25,11 +22,13 @@ class LocationModel(object):
     @administrative_area.setter
     def administrative_area(self, value_list):
         for value in value_list:
-            area = AdministrativeAreaLevelModel(value['area_type'], value['name'])
+            area = AdministrativeAreaLevelModel(
+                value['area_type'], value['name'])
             self._administrative_area.append(area)
 
 
-class AdministrativeAreaLevelModel(object):
+class AdministrativeAreaLevelModel():
+
     def __init__(self, area_type, name):
         self.area_type = area_type
         self.name = name

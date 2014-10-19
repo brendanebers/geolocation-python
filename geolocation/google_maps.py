@@ -1,11 +1,14 @@
-# -*- coding: utf-8 -*-
-from models import LocationModel
-from parsers import GeocodeParser
-from api import GeocodeApi
+from .models import LocationModel
+from .parsers import GeocodeParser
+from .api import GeocodeApi
 
 
-class GoogleMaps(object):
-    """To find address use: GoogleMaps.query(location=full_address)."""
+class GoogleMaps():
+
+    """
+    To find address use: GoogleMaps.query(location=full_address).
+    """
+
     _geocode_parser = GeocodeParser()
 
     _location = None
@@ -31,14 +34,17 @@ class GoogleMaps(object):
             location.postal_code = self._geocode_parser.get_postal_code()
 
             location.country = self._geocode_parser.get_country()
-            location.country_shortcut = self._geocode_parser.get_country_shortcut()
+            location.country_shortcut =\
+                self._geocode_parser.get_country_shortcut()
 
-            location.administrative_area = self._geocode_parser.get_administrative_area()
+            location.administrative_area =\
+                self._geocode_parser.get_administrative_area()
 
             location.lat = self._geocode_parser.get_lat()
             location.lng = self._geocode_parser.get_lng()
 
-            location.formatted_address = self._geocode_parser.get_formatted_address()
+            location.formatted_address =\
+                self._geocode_parser.get_formatted_address()
 
             self._data.add(location)
 
@@ -55,7 +61,6 @@ class GoogleMaps(object):
     def first(self):
         if self._data:
             return list(self._data)[0]
-
         return None
 
     def query(self, location):
@@ -66,5 +71,4 @@ class GoogleMaps(object):
 
         if json_results:
             self._to_python(json_results)
-
         return self
