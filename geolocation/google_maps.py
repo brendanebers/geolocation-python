@@ -1,6 +1,6 @@
-from .models import LocationModel
-from .parsers import GeocodeParser
-from .api import GeocodeApi
+from geolocation.models import LocationModel
+from geolocation.parsers import GeocodeParser
+from geolocation.api import GeocodeApi
 
 
 class GoogleMaps():
@@ -17,9 +17,14 @@ class GoogleMaps():
 
     def __init__(self, api_key):
         self._geocode_api = GeocodeApi(api_key)
+        self._reset_data()
 
     def __repr__(self):
         return '<GoogleMaps: %s>' % self._location
+
+    def _reset_data(self):
+        self._data = set()
+        self._location = None
 
     def _to_python(self, json_results):
         """Method should converts json_results to python object."""
@@ -71,4 +76,5 @@ class GoogleMaps():
 
         if json_results:
             self._to_python(json_results)
+
         return self

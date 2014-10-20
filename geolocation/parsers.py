@@ -23,9 +23,9 @@ class GeocodeParser():
 
             if type_ in types:
                 if shortcut:
-                    return address_component['short_name'].encode('utf-8')
+                    return address_component['short_name']
                 else:
-                    return address_component['long_name'].encode('utf-8')
+                    return address_component['long_name']
 
         return None
 

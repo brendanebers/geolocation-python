@@ -52,6 +52,7 @@ class GeocodeApi():
         """Method prepares query to request for google api."""
         prepare = re.sub('\s+', ' ', query_).strip()
         prepare = ',+'.join(prepare.split())
+        prepare = urllib.parse.quote(prepare)
 
         prepare = "{}{}{}".format(
             self._json_api_address, prepare, self._api_key)
@@ -65,9 +66,12 @@ class GeocodeApi():
 
     def _get_json_data(self, request):
         """Method sends request to google geocode api and returns json data."""
-        json_data = urllib.request.urlopen(request).read().decode('utf-8')
+        json_data = urllib.request.urlopen(request)
+        charset = json_data.info().get_param('charset', 'utf8')
 
-        json_results = json.loads(json_data)
+        data = json_data.read()
+
+        json_results = json.loads(data.decode(charset))
 
         status = json_results['status']
 
