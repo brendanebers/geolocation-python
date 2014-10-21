@@ -66,6 +66,7 @@ class GoogleMaps():
     def first(self):
         if self._data:
             return list(self._data)[0]
+
         return None
 
     def query(self, location):
