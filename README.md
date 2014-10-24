@@ -1,6 +1,8 @@
-![Alt text](https://travis-ci.org/slawek87/geolocation-python.svg?branch=master)  
+![Alt text](https://travis-ci.org/slawek87/geolocation-python.svg?branch=python3)  
 
-[![PyPI version](https://badge.fury.io/py/geolocation-python.svg)](https://pypi.python.org/pypi/geolocation-python/0.1.0)
+[![PyPI version](https://badge.fury.io/py/geolocation-python.svg)](https://pypi.python.org/pypi/geolocation-python3)
+
+__PYTHON 3 VERSION__
 
 What is Geolocation?
 =====================
@@ -40,7 +42,7 @@ To use this application you need to have Google API key.
 
 How to install it?
 -------------------
-    pip install geolocation-python
+    pip install geolocation-python3
 
 
 How to use it?
@@ -56,25 +58,25 @@ google_maps = GoogleMaps(api_key='your_google_maps_key')
 
 location = google_maps.query(location=address) # sends query to Google Maps.
 
-print location.all() # returns all locations.
+print(location.all()) # returns all locations.
 
 my_location = location.first() # returns only first location.
 
-print my_location.city
-print my_location.route
-print my_location.street_number
-print my_location.postal_code
+print(my_location.city)
+print(my_location.route)
+print(my_location.street_number)
+print(my_location.postal_code)
 
 for administrative_area in my_location.administrative_area:
     print "%s: %s" % (administrative_area.area_type, administrative_area.name)
 
-print my_location.country
-print my_location.country_shortcut
+print(my_location.country)
+print(my_location.country_shortcut)
 
-print my_location.formatted_address
+print(my_location.formatted_address)
 
-print my_location.lat
-print my_location.lng
+print(my_location.lat)
+print(my_location.lng)
 ```
     
-More examples you should find [here](https://github.com/slawek87/geolocation-python/tree/master/examples).
+More examples you should find [here](https://github.com/slawek87/geolocation-python/tree/python3/examples).
