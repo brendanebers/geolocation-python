@@ -7,7 +7,7 @@ with open('LICENSE', 'r') as f:
     license_ = f.read()
 
 setup(
-    name='geolocation-python',
+    name='geolocation-python3',
     version='0.1.1',
     packages=['geolocation'],
     url='',
